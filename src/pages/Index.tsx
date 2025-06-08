@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Sidebar from '@/components/Sidebar';
 import AssistantInterface from '@/components/AssistantInterface';
@@ -46,13 +45,9 @@ const Index = () => {
 
     switch (activeTab) {
       case 'loona':
+        return <AssistantInterface />;
       case 'quick-actions':
-        return (
-          <div className="space-y-8">
-            <AssistantInterface />
-            <QuickActions onActionClick={handleActionClick} />
-          </div>
-        );
+        return <QuickActions onActionClick={handleActionClick} />;
       case 'workflows':
         return (
           <div className="text-center py-12">
