@@ -96,9 +96,11 @@ const quickActions: QuickAction[] = [
 
 interface QuickActionsProps {
   onActionClick: (action: QuickAction) => void;
+  showRecommended?: boolean;
+  showAllActions?: boolean;
 }
 
-const QuickActions = ({ onActionClick }: QuickActionsProps) => {
+const QuickActions = ({ onActionClick, showRecommended = true, showAllActions = true }: QuickActionsProps) => {
   const typeLabels = {
     output: 'Output',
     draft: 'Draft',
@@ -107,78 +109,82 @@ const QuickActions = ({ onActionClick }: QuickActionsProps) => {
 
   return (
     <div className="space-y-6">
-      {/* Featured Quick Actions */}
-      <div>
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-semibold text-gray-900">Recommended For You</h2>
-          <button className="text-sm text-gray-600 hover:text-gray-900">
-            See all →
-          </button>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {quickActions.slice(0, 6).map((action) => (
-            <div
-              key={action.id}
-              onClick={() => onActionClick(action)}
-              className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer group"
-            >
-              <div className="flex items-start justify-between mb-3">
-                <action.icon className="h-6 w-6 text-gray-600 group-hover:text-gray-900" />
+      {/* Recommended Quick Actions */}
+      {showRecommended && (
+        <div>
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-semibold text-gray-900">Recommended For You</h2>
+            <button className="text-sm text-gray-600 hover:text-gray-900">
+              See all →
+            </button>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {quickActions.slice(0, 6).map((action) => (
+              <div
+                key={action.id}
+                onClick={() => onActionClick(action)}
+                className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer group"
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <action.icon className="h-6 w-6 text-gray-600 group-hover:text-gray-900" />
+                </div>
+                
+                <h3 className="font-medium text-gray-900 mb-2 group-hover:text-black">
+                  {action.title}
+                </h3>
+                
+                <p className="text-sm text-gray-600 mb-3 line-clamp-2">
+                  {action.description}
+                </p>
+                
+                <div className="flex items-center text-xs text-gray-500">
+                  <span className="capitalize">{typeLabels[action.type]}</span>
+                  <span className="mx-2">·</span>
+                  <span>{action.steps} step{action.steps > 1 ? 's' : ''}</span>
+                </div>
               </div>
-              
-              <h3 className="font-medium text-gray-900 mb-2 group-hover:text-black">
-                {action.title}
-              </h3>
-              
-              <p className="text-sm text-gray-600 mb-3 line-clamp-2">
-                {action.description}
-              </p>
-              
-              <div className="flex items-center text-xs text-gray-500">
-                <span className="capitalize">{typeLabels[action.type]}</span>
-                <span className="mx-2">·</span>
-                <span>{action.steps} step{action.steps > 1 ? 's' : ''}</span>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* All Actions - Large Grid */}
-      <div>
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-semibold text-gray-900">All Actions</h2>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {quickActions.map((action) => (
-            <div
-              key={action.id}
-              onClick={() => onActionClick(action)}
-              className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer group"
-            >
-              <div className="flex items-start justify-between mb-4">
-                <action.icon className="h-8 w-8 text-gray-600 group-hover:text-gray-900" />
+      {showAllActions && (
+        <div>
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-semibold text-gray-900">All Actions</h2>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {quickActions.map((action) => (
+              <div
+                key={action.id}
+                onClick={() => onActionClick(action)}
+                className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer group"
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <action.icon className="h-8 w-8 text-gray-600 group-hover:text-gray-900" />
+                </div>
+                
+                <h3 className="text-lg font-medium text-gray-900 mb-3 group-hover:text-black">
+                  {action.title}
+                </h3>
+                
+                <p className="text-sm text-gray-600 mb-4">
+                  {action.description}
+                </p>
+                
+                <div className="flex items-center text-xs text-gray-500">
+                  <span className="capitalize">{typeLabels[action.type]}</span>
+                  <span className="mx-2">·</span>
+                  <span>{action.steps} step{action.steps > 1 ? 's' : ''}</span>
+                </div>
               </div>
-              
-              <h3 className="text-lg font-medium text-gray-900 mb-3 group-hover:text-black">
-                {action.title}
-              </h3>
-              
-              <p className="text-sm text-gray-600 mb-4">
-                {action.description}
-              </p>
-              
-              <div className="flex items-center text-xs text-gray-500">
-                <span className="capitalize">{typeLabels[action.type]}</span>
-                <span className="mx-2">·</span>
-                <span>{action.steps} step{action.steps > 1 ? 's' : ''}</span>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

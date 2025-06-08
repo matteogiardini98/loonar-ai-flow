@@ -45,9 +45,24 @@ const Index = () => {
 
     switch (activeTab) {
       case 'loona':
-        return <AssistantInterface />;
+        return (
+          <div className="space-y-8">
+            <AssistantInterface />
+            <QuickActions 
+              onActionClick={handleActionClick} 
+              showRecommended={true}
+              showAllActions={false}
+            />
+          </div>
+        );
       case 'quick-actions':
-        return <QuickActions onActionClick={handleActionClick} />;
+        return (
+          <QuickActions 
+            onActionClick={handleActionClick}
+            showRecommended={false}
+            showAllActions={true}
+          />
+        );
       case 'workflows':
         return (
           <div className="text-center py-12">
