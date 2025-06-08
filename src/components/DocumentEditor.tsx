@@ -21,7 +21,7 @@ interface DocumentEditorProps {
 
 const DocumentEditor = ({ document, onDocumentUpdate, onToggleAIAssistant }: DocumentEditorProps) => {
   const editorRef = useRef<HTMLDivElement>(null);
-  const { selectedText, selectionRange, showPopup, popupPosition } = useTextSelection(editorRef);
+  const { selectedText, selectionRange, showPopup, popupPosition, isSelecting } = useTextSelection(editorRef);
 
   const handleContentChange = (e: React.FormEvent<HTMLDivElement>) => {
     const newContent = e.currentTarget.textContent || '';
@@ -84,6 +84,7 @@ const DocumentEditor = ({ document, onDocumentUpdate, onToggleAIAssistant }: Doc
           <TextSelectionPopup
             position={popupPosition}
             selectedText={selectedText}
+            isSelecting={isSelecting}
             onInstruction={handleAIInstruction}
           />
         )}
