@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { Bot, Zap, GitBranch, Library, BarChart3, HelpCircle, Settings } from 'lucide-react';
+import { Bot, Zap, GitBranch, Library, BarChart3, HelpCircle, Settings, FileEdit } from 'lucide-react';
 
 interface SidebarProps {
   activeTab: string;
@@ -12,6 +11,7 @@ const Sidebar = ({ activeTab, onTabChange }: SidebarProps) => {
     { id: 'loona', label: 'Loona', icon: Bot },
     { id: 'quick-actions', label: 'Quick actions', icon: Zap },
     { id: 'workflows', label: 'Workflows', icon: GitBranch },
+    { id: 'workspace', label: 'Workspace', icon: FileEdit },
     { id: 'library', label: 'Library', icon: Library },
     { id: 'analytics', label: 'Analytics', icon: BarChart3 },
   ];

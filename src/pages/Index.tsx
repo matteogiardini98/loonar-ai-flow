@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Sidebar from '@/components/Sidebar';
 import AssistantInterface from '@/components/AssistantInterface';
@@ -8,6 +7,7 @@ import ActionModal from '@/components/ActionModal';
 import LibraryView from '@/components/LibraryView';
 import AnalyticsView from '@/components/AnalyticsView';
 import WorkflowCanvas from '@/components/WorkflowCanvas';
+import WorkspaceView from '@/components/WorkspaceView';
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState('loona');
@@ -95,6 +95,8 @@ const Index = () => {
         );
       case 'workflows':
         return <WorkflowCanvas />;
+      case 'workspace':
+        return <WorkspaceView />;
       case 'library':
         return <LibraryView />;
       case 'analytics':
@@ -124,8 +126,8 @@ const Index = () => {
       
       <main className="flex-1 ml-64 overflow-hidden">
         <div className="h-full overflow-y-auto">
-          {activeTab === 'workflows' ? (
-            <WorkflowCanvas />
+          {activeTab === 'workflows' || activeTab === 'workspace' ? (
+            renderMainContent()
           ) : (
             <div className="max-w-7xl mx-auto p-6">
               {renderMainContent()}
