@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import Sidebar from '@/components/Sidebar';
 import AssistantInterface from '@/components/AssistantInterface';
@@ -121,7 +122,7 @@ const Index = () => {
     <div className="min-h-screen bg-white flex w-full">
       <Sidebar activeTab={activeTab} onTabChange={setActiveTab} />
       
-      <main className="flex-1 overflow-hidden">
+      <main className="flex-1 ml-64 overflow-hidden">
         <div className="h-full overflow-y-auto">
           {activeTab === 'workflows' ? (
             <WorkflowCanvas />
