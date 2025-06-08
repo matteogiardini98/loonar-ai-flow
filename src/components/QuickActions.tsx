@@ -9,7 +9,6 @@ interface QuickAction {
   icon: React.ElementType;
   steps: number;
   type: 'output' | 'draft' | 'table';
-  priority: 'P0' | 'P1' | 'P2';
 }
 
 const quickActions: QuickAction[] = [
@@ -19,8 +18,7 @@ const quickActions: QuickAction[] = [
     description: 'Quickly search through RFP documentation and get summaries with clear citations',
     icon: FileSearch,
     steps: 2,
-    type: 'output',
-    priority: 'P0'
+    type: 'output'
   },
   {
     id: 'compliance-matrix',
@@ -28,8 +26,7 @@ const quickActions: QuickAction[] = [
     description: 'Extract all RFP requirements and assess compliance against internal documentation',
     icon: CheckSquare,
     steps: 2,
-    type: 'table',
-    priority: 'P0'
+    type: 'table'
   },
   {
     id: 'proposal-generation',
@@ -37,8 +34,7 @@ const quickActions: QuickAction[] = [
     description: 'Generate a draft proposal combining templates, compliance data, and project documentation',
     icon: FileText,
     steps: 3,
-    type: 'draft',
-    priority: 'P0'
+    type: 'draft'
   },
   {
     id: 'pre-bid-evaluation',
@@ -46,8 +42,7 @@ const quickActions: QuickAction[] = [
     description: 'Compare new RFP requirements against company bidding criteria',
     icon: BarChart3,
     steps: 2,
-    type: 'output',
-    priority: 'P1'
+    type: 'output'
   },
   {
     id: 'ask-sme',
@@ -55,8 +50,7 @@ const quickActions: QuickAction[] = [
     description: 'Conduct deep research to gather relevant subject matter expertise',
     icon: Users,
     steps: 2,
-    type: 'output',
-    priority: 'P1'
+    type: 'output'
   },
   {
     id: 'supplier-rfp',
@@ -64,8 +58,7 @@ const quickActions: QuickAction[] = [
     description: 'Draft RFPs for sub-contractors to fulfill specific requirements',
     icon: Send,
     steps: 2,
-    type: 'draft',
-    priority: 'P2'
+    type: 'draft'
   },
   {
     id: 'gather-feedback',
@@ -73,8 +66,7 @@ const quickActions: QuickAction[] = [
     description: 'Receive and analyze client feedback for won or lost RFPs',
     icon: MessageSquare,
     steps: 1,
-    type: 'output',
-    priority: 'P1'
+    type: 'output'
   },
   {
     id: 'proposal-editing',
@@ -82,8 +74,7 @@ const quickActions: QuickAction[] = [
     description: 'Workspace for reviewing and editing proposals with AI assistance',
     icon: Edit,
     steps: 1,
-    type: 'draft',
-    priority: 'P1'
+    type: 'draft'
   },
   {
     id: 'executive-review',
@@ -91,8 +82,7 @@ const quickActions: QuickAction[] = [
     description: 'Generate summary of proposal for commercial director review',
     icon: Eye,
     steps: 1,
-    type: 'output',
-    priority: 'P0'
+    type: 'output'
   },
   {
     id: 'library-management',
@@ -100,8 +90,7 @@ const quickActions: QuickAction[] = [
     description: 'Manage your knowledge base of RFPs, proposals, and documentation',
     icon: Database,
     steps: 1,
-    type: 'output',
-    priority: 'P0'
+    type: 'output'
   }
 ];
 
@@ -110,24 +99,18 @@ interface QuickActionsProps {
 }
 
 const QuickActions = ({ onActionClick }: QuickActionsProps) => {
-  const typeIcons = {
-    output: '📄',
-    draft: '📝',
-    table: '📊'
-  };
-
-  const priorityColors = {
-    P0: 'bg-red-50 text-red-600 border-red-200',
-    P1: 'bg-yellow-50 text-yellow-600 border-yellow-200',
-    P2: 'bg-green-50 text-green-600 border-green-200'
+  const typeLabels = {
+    output: 'Output',
+    draft: 'Draft',
+    table: 'Table'
   };
 
   return (
     <div className="space-y-6">
-      {/* Recommended For You */}
+      {/* Featured Quick Actions */}
       <div>
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-semibold text-gray-900">Quick Actions</h2>
+          <h2 className="text-lg font-semibold text-gray-900">Recommended For You</h2>
           <button className="text-sm text-gray-600 hover:text-gray-900">
             See all →
           </button>
@@ -142,9 +125,6 @@ const QuickActions = ({ onActionClick }: QuickActionsProps) => {
             >
               <div className="flex items-start justify-between mb-3">
                 <action.icon className="h-6 w-6 text-gray-600 group-hover:text-gray-900" />
-                <span className={`px-2 py-1 text-xs rounded-full border ${priorityColors[action.priority]}`}>
-                  {action.priority}
-                </span>
               </div>
               
               <h3 className="font-medium text-gray-900 mb-2 group-hover:text-black">
@@ -156,8 +136,7 @@ const QuickActions = ({ onActionClick }: QuickActionsProps) => {
               </p>
               
               <div className="flex items-center text-xs text-gray-500">
-                <span className="mr-1">{typeIcons[action.type]}</span>
-                <span className="capitalize">{action.type}</span>
+                <span className="capitalize">{typeLabels[action.type]}</span>
                 <span className="mx-2">·</span>
                 <span>{action.steps} step{action.steps > 1 ? 's' : ''}</span>
               </div>
@@ -166,29 +145,35 @@ const QuickActions = ({ onActionClick }: QuickActionsProps) => {
         </div>
       </div>
 
-      {/* All Actions */}
+      {/* All Actions - Large Grid */}
       <div>
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold text-gray-900">All Actions</h2>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {quickActions.map((action) => (
             <div
               key={action.id}
               onClick={() => onActionClick(action)}
-              className="bg-gray-50 border border-gray-200 rounded-lg p-3 hover:bg-gray-100 transition-colors cursor-pointer group"
+              className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer group"
             >
-              <div className="flex items-center gap-3">
-                <action.icon className="h-5 w-5 text-gray-600 group-hover:text-gray-900" />
-                <div className="flex-1 min-w-0">
-                  <h4 className="text-sm font-medium text-gray-900 truncate group-hover:text-black">
-                    {action.title}
-                  </h4>
-                  <p className="text-xs text-gray-500">
-                    {action.steps} step{action.steps > 1 ? 's' : ''}
-                  </p>
-                </div>
+              <div className="flex items-start justify-between mb-4">
+                <action.icon className="h-8 w-8 text-gray-600 group-hover:text-gray-900" />
+              </div>
+              
+              <h3 className="text-lg font-medium text-gray-900 mb-3 group-hover:text-black">
+                {action.title}
+              </h3>
+              
+              <p className="text-sm text-gray-600 mb-4">
+                {action.description}
+              </p>
+              
+              <div className="flex items-center text-xs text-gray-500">
+                <span className="capitalize">{typeLabels[action.type]}</span>
+                <span className="mx-2">·</span>
+                <span>{action.steps} step{action.steps > 1 ? 's' : ''}</span>
               </div>
             </div>
           ))}

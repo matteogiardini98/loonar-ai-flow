@@ -35,6 +35,28 @@ const AssistantInterface = () => {
           className="min-h-[120px] resize-none border-0 bg-transparent text-base placeholder:text-gray-500 focus:ring-0"
         />
         
+        {/* Action Buttons - moved to top */}
+        <div className="flex items-center justify-between">
+          <div className="flex gap-2">
+            <Button variant="outline" size="sm" className="gap-2">
+              <Upload size={16} />
+              Load prompt
+            </Button>
+            <Button variant="outline" size="sm">
+              Save prompt
+            </Button>
+          </div>
+          
+          <Button 
+            onClick={handleSendQuery}
+            className="bg-black text-white hover:bg-gray-800 gap-2"
+            disabled={!query.trim()}
+          >
+            Ask Loona
+            <Send size={16} />
+          </Button>
+        </div>
+
         {/* Document Selection Section */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {/* File Upload */}
@@ -57,27 +79,6 @@ const AssistantInterface = () => {
               Select from Library
             </Button>
           </div>
-        </div>
-        
-        <div className="flex items-center justify-between">
-          <div className="flex gap-2">
-            <Button variant="outline" size="sm" className="gap-2">
-              <Upload size={16} />
-              Load prompt
-            </Button>
-            <Button variant="outline" size="sm">
-              Save prompt
-            </Button>
-          </div>
-          
-          <Button 
-            onClick={handleSendQuery}
-            className="bg-black text-white hover:bg-gray-800 gap-2"
-            disabled={!query.trim()}
-          >
-            Ask Loona
-            <Send size={16} />
-          </Button>
         </div>
       </div>
     </div>
