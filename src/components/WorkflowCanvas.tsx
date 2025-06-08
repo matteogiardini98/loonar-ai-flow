@@ -89,22 +89,10 @@ const WorkflowCanvas = () => {
 
         {/* Fixed Workflow Controls */}
         <div className="p-4 border-t border-gray-200 bg-white flex-shrink-0">
-          <div className="space-y-2">
-            <button className="w-full flex items-center justify-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-              <Play className="h-4 w-4" />
-              Run Workflow
-            </button>
-            <div className="flex gap-2">
-              <button className="flex-1 flex items-center justify-center gap-2 bg-gray-100 text-gray-700 px-3 py-2 rounded-lg hover:bg-gray-200 transition-colors">
-                <Save className="h-4 w-4" />
-                Save
-              </button>
-              <button className="flex-1 flex items-center justify-center gap-2 bg-gray-100 text-gray-700 px-3 py-2 rounded-lg hover:bg-gray-200 transition-colors">
-                <Download className="h-4 w-4" />
-                Export
-              </button>
-            </div>
-          </div>
+          <button className="w-full flex items-center justify-center gap-2 bg-coosmo-green text-coosmo-green-foreground px-4 py-2 rounded-lg hover:bg-coosmo-green/90 transition-colors">
+            <Play className="h-4 w-4" />
+            Run Workflow
+          </button>
         </div>
       </div>
 
