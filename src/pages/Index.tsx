@@ -3,6 +3,7 @@ import Sidebar from '@/components/Sidebar';
 import AssistantInterface from '@/components/AssistantInterface';
 import QuickActions from '@/components/QuickActions';
 import ActionWorkspace from '@/components/ActionWorkspace';
+import ActionModal from '@/components/ActionModal';
 import LibraryView from '@/components/LibraryView';
 import AnalyticsView from '@/components/AnalyticsView';
 import WorkflowCanvas from '@/components/WorkflowCanvas';
@@ -11,9 +12,36 @@ const Index = () => {
   const [activeTab, setActiveTab] = useState('loona');
   const [selectedAction, setSelectedAction] = useState<any>(null);
   const [isExecuting, setIsExecuting] = useState(false);
+  const [isActionModalOpen, setIsActionModalOpen] = useState(false);
+  const [modalAction, setModalAction] = useState<any>(null);
 
   const handleActionClick = (action: any) => {
-    setSelectedAction(action);
+    // Open modal for recommended actions in Loona tab
+    if (activeTab === 'loona') {
+      setModalAction(action);
+      setIsActionModalOpen(true);
+    } else {
+      // Keep existing behavior for other tabs
+      setSelectedAction(action);
+    }
+  };
+
+  const handleModalExecute = (formData: any) => {
+    console.log('Executing action from modal:', formData);
+    setIsExecuting(true);
+    
+    // Simulate execution
+    setTimeout(() => {
+      setIsExecuting(false);
+      setIsActionModalOpen(false);
+      setModalAction(null);
+      // Here you would typically handle the actual execution results
+    }, 2000);
+  };
+
+  const handleModalClose = () => {
+    setIsActionModalOpen(false);
+    setModalAction(null);
   };
 
   const handleActionExecute = (formData: any) => {
@@ -104,6 +132,14 @@ const Index = () => {
           )}
         </div>
       </main>
+      
+      {/* Action Modal */}
+      <ActionModal
+        isOpen={isActionModalOpen}
+        onClose={handleModalClose}
+        action={modalAction}
+        onExecute={handleModalExecute}
+      />
       
       {isExecuting && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
