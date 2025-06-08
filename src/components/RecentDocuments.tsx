@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -198,32 +197,22 @@ Understand user behavior patterns and pain points throughout the customer journe
           {recentDocuments.map((document) => (
             <Card
               key={document.id}
-              className="w-80 h-96 cursor-pointer hover:shadow-lg transition-shadow duration-200 flex-shrink-0"
+              className="w-64 h-24 cursor-pointer hover:shadow-lg transition-shadow duration-200 flex-shrink-0"
               onClick={() => onDocumentOpen(document)}
             >
-              <CardContent className="p-4 h-full flex flex-col">
-                {/* Document header */}
-                <div className="flex items-start gap-3 mb-3">
-                  <FileText className="h-5 w-5 text-blue-600 mt-1 flex-shrink-0" />
+              <CardContent className="p-4 h-full flex items-center">
+                <div className="flex items-start gap-3 w-full">
+                  <FileText className="h-5 w-5 text-blue-600 mt-0.5 flex-shrink-0" />
                   <div className="min-w-0 flex-1">
-                    <h4 className="font-medium text-gray-900 text-sm line-clamp-2 leading-tight">
+                    <h4 className="font-medium text-gray-900 text-sm line-clamp-2 leading-tight mb-1">
                       {document.name}
                     </h4>
-                    <div className="flex items-center gap-2 mt-1">
+                    <div className="flex items-center gap-2">
                       <span className="text-xs text-gray-500">{document.type}</span>
                       <span className="text-xs text-gray-400">•</span>
                       <span className="text-xs text-gray-500">{formatLastModified(document.lastModified)}</span>
                     </div>
                   </div>
-                </div>
-                
-                {/* Document content preview */}
-                <div className="flex-1 overflow-hidden">
-                  <ScrollArea className="h-full">
-                    <div className="text-xs text-gray-700 leading-relaxed whitespace-pre-wrap">
-                      {document.content}
-                    </div>
-                  </ScrollArea>
                 </div>
               </CardContent>
             </Card>
