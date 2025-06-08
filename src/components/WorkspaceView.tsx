@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { FileEdit } from 'lucide-react';
 import DocumentSearchBar from './DocumentSearchBar';
+import RecentDocuments from './RecentDocuments';
 import DocumentTabs from './DocumentTabs';
 import DocumentEditor from './DocumentEditor';
 import AIAssistantPanel from './AIAssistantPanel';
@@ -54,6 +55,11 @@ const WorkspaceView = () => {
         <DocumentSearchBar onDocumentOpen={handleDocumentOpen} />
       </div>
 
+      {/* Recently used documents section */}
+      <div className="border-b border-gray-200 p-4">
+        <RecentDocuments onDocumentOpen={handleDocumentOpen} />
+      </div>
+
       {/* Document tabs */}
       {openDocuments.length > 0 && (
         <DocumentTabs
@@ -79,7 +85,7 @@ const WorkspaceView = () => {
               <div className="text-center">
                 <FileEdit className="h-12 w-12 mx-auto mb-4 text-gray-400" />
                 <h3 className="text-lg font-medium mb-2">No document open</h3>
-                <p>Search for a document above to start editing</p>
+                <p>Search for a document above or select from recently used documents</p>
               </div>
             </div>
           )}
