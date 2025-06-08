@@ -1,5 +1,5 @@
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Bot } from 'lucide-react';
 import TextSelectionPopup from './TextSelectionPopup';
@@ -21,10 +21,20 @@ interface DocumentEditorProps {
 
 const DocumentEditor = ({ document, onDocumentUpdate, onToggleAIAssistant }: DocumentEditorProps) => {
   const editorRef = useRef<HTMLDivElement>(null);
+  const [content, setContent] = useState(document.content);
   const { selectedText, selectionRange, showPopup, popupPosition, isSelecting } = useTextSelection(editorRef);
 
+  // Update content when document changes
+  useEffect(() => {
+    setContent(document.content);
+    if (editorRef.current) {
+      editorRef.current.innerHTML = document.content.replace(/\n/g, '<br>');
+    }
+  }, [document.id, document.content]);
+
   const handleContentChange = (e: React.FormEvent<HTMLDivElement>) => {
-    const newContent = e.currentTarget.textContent || '';
+    const newContent = e.currentTarget.innerText || '';
+    setContent(newContent);
     onDocumentUpdate(document.id, newContent);
   };
 
@@ -42,7 +52,8 @@ const DocumentEditor = ({ document, onDocumentUpdate, onToggleAIAssistant }: Doc
         range.insertNode(window.document.createTextNode(mockAIResponse));
         
         // Update document content
-        const newContent = editorRef.current?.textContent || '';
+        const newContent = editorRef.current?.innerText || '';
+        setContent(newContent);
         onDocumentUpdate(document.id, newContent);
       }
     }
@@ -73,11 +84,10 @@ const DocumentEditor = ({ document, onDocumentUpdate, onToggleAIAssistant }: Doc
           contentEditable
           suppressContentEditableWarning
           onInput={handleContentChange}
-          className="h-full p-6 focus:outline-none text-gray-900 leading-relaxed"
+          className="h-full p-6 focus:outline-none text-gray-900 leading-relaxed whitespace-pre-wrap"
           style={{ minHeight: '100%' }}
-        >
-          {document.content}
-        </div>
+          dangerouslySetInnerHTML={{ __html: content.replace(/\n/g, '<br>') }}
+        />
 
         {/* Text Selection Popup */}
         {showPopup && selectedText && (

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -16,167 +17,177 @@ interface RecentDocumentsProps {
 }
 
 const RecentDocuments = ({ onDocumentOpen }: RecentDocumentsProps) => {
-  // Mock recent documents data with full content
+  // Updated document examples with the requested types
   const recentDocuments: Document[] = [
     {
       id: '1',
-      name: 'Project Proposal - Q1 2024',
-      content: `# Project Proposal - Q1 2024
+      name: 'Infrastructure Modernization Proposal',
+      content: `# Infrastructure Modernization Proposal
 
 ## Executive Summary
-This proposal outlines our strategic initiative for the first quarter of 2024, focusing on expanding our market presence and enhancing customer satisfaction through innovative solutions.
+This proposal outlines a comprehensive infrastructure modernization initiative to upgrade our legacy systems and enhance operational efficiency across all departments.
 
-## Objectives
-1. Increase market share by 15%
-2. Launch three new product features
-3. Improve customer retention rate to 95%
-4. Establish partnerships with 5 key vendors
+## Project Scope
+- Cloud migration strategy for core applications
+- Network infrastructure upgrade
+- Security framework enhancement
+- Data center consolidation
 
-## Budget Allocation
-- Marketing: $150,000
-- Development: $200,000
-- Operations: $100,000
-- Training: $50,000
+## Budget Requirements
+Total estimated cost: $2.5M over 18 months
+- Phase 1 (Cloud Migration): $800K
+- Phase 2 (Network Upgrade): $900K
+- Phase 3 (Security Implementation): $500K
+- Contingency (10%): $300K
 
 ## Timeline
-- January: Market research and planning
-- February: Development phase begins
-- March: Testing and initial rollout
+- Q1 2024: Planning and vendor selection
+- Q2-Q3 2024: Phase 1 implementation
+- Q4 2024-Q1 2025: Phase 2 and 3 execution
+- Q2 2025: Testing and optimization
 
-## Expected Outcomes
-We anticipate significant growth in customer acquisition and retention, leading to a projected 20% increase in revenue for Q1.`,
+## Expected Benefits
+- 40% reduction in operational costs
+- 99.9% system uptime guarantee
+- Enhanced security posture
+- Improved scalability for future growth`,
       type: 'Proposal',
       lastModified: '2 hours ago'
     },
     {
       id: '2',
-      name: 'Technical Requirements Document',
-      content: `# Technical Requirements Document
+      name: 'Regulatory Compliance Matrix - SOX & GDPR',
+      content: `# Regulatory Compliance Matrix
 
-## System Overview
-This document defines the technical requirements for our new customer management system, including architecture, performance, and security specifications.
+## Compliance Framework Overview
+This matrix tracks our organization's compliance status across SOX (Sarbanes-Oxley) and GDPR (General Data Protection Regulation) requirements.
 
-## Architecture Requirements
-- Microservices-based architecture
-- Cloud-native deployment (AWS/Azure)
-- RESTful API design
-- Real-time data processing capabilities
+## SOX Compliance Status
+### Section 302 - Corporate Responsibility
+- ✅ CEO/CFO Certifications - Complete
+- ✅ Internal Controls Assessment - Complete
+- ⚠️ Quarterly Reviews - In Progress
+- ❌ Documentation Updates - Pending
 
-## Performance Requirements
-- Response time: < 200ms for 95% of requests
-- Throughput: 10,000 concurrent users
-- Availability: 99.9% uptime
-- Scalability: Auto-scaling based on load
+### Section 404 - Management Assessment
+- ✅ Control Framework Implementation - Complete
+- ✅ External Auditor Testing - Complete
+- ⚠️ Deficiency Remediation - 80% Complete
 
-## Security Requirements
-- OAuth 2.0 authentication
-- End-to-end encryption
-- GDPR compliance
-- Regular security audits
+## GDPR Compliance Status
+### Data Protection Principles
+- ✅ Lawfulness, Fairness, Transparency - Complete
+- ✅ Purpose Limitation - Complete
+- ⚠️ Data Minimization - 90% Complete
+- ✅ Accuracy - Complete
+- ⚠️ Storage Limitation - In Review
 
-## Technology Stack
-- Frontend: React, TypeScript
-- Backend: Node.js, Express
-- Database: PostgreSQL, Redis
-- Infrastructure: Docker, Kubernetes
+### Individual Rights
+- ✅ Right to Information - Complete
+- ✅ Right of Access - Complete
+- ⚠️ Right to Rectification - 95% Complete
+- ❌ Right to Erasure - Implementation Required
 
-## Integration Requirements
-- Third-party CRM integration
-- Payment gateway integration
-- Email service integration
-- Analytics platform integration`,
-      type: 'Technical Spec',
+## Risk Assessment
+- High Risk: 2 items requiring immediate attention
+- Medium Risk: 5 items with 30-day remediation plan
+- Low Risk: 8 items for continuous monitoring`,
+      type: 'Compliance Matrix',
       lastModified: '1 day ago'
     },
     {
       id: '3',
-      name: 'Marketing Campaign Brief',
-      content: `# Marketing Campaign Brief - Summer 2024
+      name: 'RFP Analysis - Digital Transformation Services',
+      content: `# Pre-Bid RFP Analysis
+## RFP-2024-DT-001: Digital Transformation Services
 
-## Campaign Overview
-Launch a comprehensive digital marketing campaign to promote our new product line and increase brand awareness during the summer season.
+### RFP Overview
+- **Issuing Agency**: Department of Technology Services
+- **Total Contract Value**: $15M over 3 years
+- **Submission Deadline**: March 15, 2024, 2:00 PM EST
+- **Pre-proposal Conference**: February 20, 2024
 
-## Target Audience
-- Primary: Tech-savvy professionals aged 25-45
-- Secondary: Small to medium business owners
-- Geographic focus: North America and Europe
+### Key Requirements Analysis
+#### Technical Requirements
+- Cloud-first architecture (mandatory)
+- API-driven integration capabilities
+- Modern web application framework
+- Mobile-responsive design
+- 99.9% uptime SLA requirement
 
-## Key Messages
-1. Innovation that simplifies your workflow
-2. Trusted by industry leaders
-3. Affordable solutions for growing businesses
+#### Functional Requirements
+- User management system (5,000+ users)
+- Document management workflow
+- Real-time collaboration tools
+- Advanced reporting and analytics
+- Multi-language support (English, Spanish, French)
 
-## Channel Strategy
-### Digital Channels
-- Social media advertising (LinkedIn, Twitter, Facebook)
-- Google Ads and SEO optimization
-- Email marketing campaigns
-- Influencer partnerships
+### Competitive Landscape
+#### Likely Competitors
+1. **TechCorp Solutions** - Strong in government sector
+2. **CloudWorks Inc** - Competitive pricing model
+3. **Digital Partners LLC** - Local presence advantage
 
-### Traditional Channels
-- Industry conference sponsorships
-- Trade publication advertisements
-- Direct mail to qualified prospects
+### Win Probability Assessment
+- **Technical Capability**: 95% match
+- **Experience Requirements**: 100% qualified
+- **Price Competitiveness**: Medium confidence
+- **Overall Win Probability**: 75%
 
-## Budget Breakdown
-- Digital advertising: $300,000
-- Content creation: $100,000
-- Events and sponsorships: $150,000
-- Analytics and tools: $50,000
-
-## Success Metrics
-- Lead generation: 5,000 qualified leads
-- Brand awareness: 25% increase
-- Website traffic: 40% increase
-- Conversion rate: 3.5% target`,
-      type: 'Marketing',
+### Recommended Bid Strategy
+- Emphasize security and compliance expertise
+- Highlight previous government project successes
+- Propose phased implementation approach
+- Include local workforce commitment`,
+      type: 'Pre-bid RFP Analysis',
       lastModified: '3 days ago'
     },
     {
       id: '4',
-      name: 'User Research Report',
-      content: `# User Research Report - Customer Journey Analysis
+      name: 'Cybersecurity Enhancement Proposal',
+      content: `# Cybersecurity Enhancement Proposal
 
-## Research Objectives
-Understand user behavior patterns and pain points throughout the customer journey to improve product experience and increase satisfaction.
+## Current Security Posture Assessment
+Our organization faces evolving cyber threats that require immediate attention and strategic investment in advanced security measures.
 
-## Methodology
-- User interviews: 50 participants
-- Surveys: 500 responses
-- Analytics data: 6-month period
-- Usability testing: 25 sessions
+## Identified Vulnerabilities
+### Critical Issues
+- Outdated firewall configurations
+- Insufficient endpoint protection
+- Limited security awareness training
+- Absence of zero-trust architecture
 
-## Key Findings
+### Risk Exposure
+- Potential for ransomware attacks
+- Data breach vulnerabilities
+- Compliance gaps with industry standards
+- Inadequate incident response capabilities
 
-### User Personas
-1. **The Efficiency Seeker** (40% of users)
-   - Values speed and automation
-   - Frustrated by manual processes
-   - Tech-savvy early adopters
+## Proposed Security Enhancements
+### Phase 1: Immediate Actions (30 days)
+- Deploy advanced endpoint detection and response (EDR)
+- Implement multi-factor authentication across all systems
+- Conduct emergency security awareness training
+- Establish 24/7 security operations center (SOC)
 
-2. **The Collaborative Manager** (35% of users)
-   - Needs team coordination features
-   - Values communication tools
-   - Requires approval workflows
+### Phase 2: Strategic Improvements (90 days)
+- Zero-trust network architecture implementation
+- Advanced threat intelligence integration
+- Automated security orchestration platform
+- Enhanced backup and disaster recovery systems
 
-3. **The Data-Driven Analyst** (25% of users)
-   - Relies on detailed reporting
-   - Needs export capabilities
-   - Values customizable dashboards
+## Investment Requirements
+- Initial Implementation: $750K
+- Annual Operating Costs: $200K
+- Training and Certification: $50K
+- Total First Year: $1M
 
-### Pain Points
-- Complex onboarding process (mentioned by 78% of users)
-- Limited mobile functionality (65% of users)
-- Slow loading times during peak hours (52% of users)
-- Difficulty finding specific features (48% of users)
-
-## Recommendations
-1. Streamline onboarding with guided tours
-2. Develop mobile-first responsive design
-3. Optimize performance and caching
-4. Improve navigation and search functionality
-5. Implement contextual help system`,
-      type: 'Research',
+## Expected ROI
+- 80% reduction in security incidents
+- Compliance with all regulatory requirements
+- $2M+ savings from prevented breaches
+- Enhanced customer trust and reputation`,
+      type: 'Proposal',
       lastModified: '5 days ago'
     }
   ];

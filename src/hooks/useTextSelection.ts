@@ -1,3 +1,4 @@
+
 import { useState, useEffect, RefObject, useCallback } from 'react';
 
 interface Position {
@@ -23,6 +24,7 @@ const useTextSelection = (containerRef: RefObject<HTMLElement>) => {
   const [showPopup, setShowPopup] = useState(false);
   const [popupPosition, setPopupPosition] = useState<Position>({ x: 0, y: 0 });
   const [isSelecting, setIsSelecting] = useState(false);
+  const [currentMousePosition, setCurrentMousePosition] = useState<Position>({ x: 0, y: 0 });
 
   // Throttle function to limit position updates
   const throttle = (func: Function, delay: number) => {
@@ -68,26 +70,32 @@ const useTextSelection = (containerRef: RefObject<HTMLElement>) => {
     if (containerRef.current?.contains(event.target as Node)) {
       setIsSelecting(true);
       setSelectionState(SelectionState.SELECTING);
-      setShowPopup(false); // Hide popup initially during selection
+      setCurrentMousePosition({ x: event.clientX, y: event.clientY });
     }
   }, [containerRef]);
 
-  // Handle mouse movement during selection
+  // Handle mouse movement to track cursor position
   const handleMouseMove = useCallback(throttle((event: MouseEvent) => {
-    if (isSelecting && containerRef.current?.contains(event.target as Node)) {
-      const newPosition = calculatePopupPosition(event.clientX, event.clientY);
-      setPopupPosition(newPosition);
+    if (containerRef.current?.contains(event.target as Node)) {
+      const newPosition = { x: event.clientX, y: event.clientY };
+      setCurrentMousePosition(newPosition);
       
-      // Check if there's any text selected and show preview popup
-      const currentSelection = window.getSelection();
-      const text = currentSelection?.toString().trim() || '';
+      // Update popup position to follow cursor closely
+      const popupPos = calculatePopupPosition(event.clientX, event.clientY);
+      setPopupPosition(popupPos);
       
-      if (text.length > 0) {
-        setSelectedText(text);
-        setShowPopup(true);
+      // If we're selecting, show preview popup with current selection
+      if (isSelecting) {
+        const currentSelection = window.getSelection();
+        const text = currentSelection?.toString().trim() || '';
+        
+        if (text.length > 0) {
+          setSelectedText(text);
+          setShowPopup(true);
+        }
       }
     }
-  }, 16), [isSelecting, containerRef]);
+  }, 10), [isSelecting, containerRef]); // Reduced throttle delay for more responsive following
 
   // Handle mouse up to end selection tracking
   const handleMouseUp = useCallback(() => {
@@ -116,26 +124,35 @@ const useTextSelection = (containerRef: RefObject<HTMLElement>) => {
             end: range.endOffset
           });
           
-          // If we're not actively selecting (mouse released), finalize position
+          // If we're not actively selecting (mouse released), use selection bounds for positioning
           if (!isSelecting) {
             setSelectionState(SelectionState.SELECTED);
             const rect = range.getBoundingClientRect();
-            const finalPosition = calculatePopupPosition(rect.left, rect.bottom + window.scrollY);
+            const finalPosition = calculatePopupPosition(
+              rect.left + rect.width / 2, 
+              rect.bottom + window.scrollY
+            );
             setPopupPosition(finalPosition);
             setShowPopup(true);
           }
         } else {
-          setShowPopup(false);
-          setSelectionState(SelectionState.IDLE);
+          // Only hide popup if we're not selecting
+          if (!isSelecting) {
+            setShowPopup(false);
+            setSelectionState(SelectionState.IDLE);
+          }
         }
       } else {
         setShowPopup(false);
         setSelectionState(SelectionState.IDLE);
       }
     } else {
-      setShowPopup(false);
-      setSelectionState(SelectionState.IDLE);
-      setSelectedText('');
+      // Only hide popup if we're not selecting
+      if (!isSelecting) {
+        setShowPopup(false);
+        setSelectionState(SelectionState.IDLE);
+        setSelectedText('');
+      }
     }
   }, [containerRef, isSelecting]);
 
@@ -144,6 +161,7 @@ const useTextSelection = (containerRef: RefObject<HTMLElement>) => {
     if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
       setShowPopup(false);
       setSelectionState(SelectionState.IDLE);
+      setSelectedText('');
     }
   }, [containerRef]);
 
