@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { Plus, Play, Save, Download } from 'lucide-react';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import { quickActions } from './QuickActions';
 
 interface WorkflowStep {
@@ -46,44 +47,48 @@ const WorkflowCanvas = () => {
   return (
     <div className="flex h-full">
       {/* Left Side Panel */}
-      <div className="w-80 bg-gray-50 border-r border-gray-200 flex flex-col">
-        <div className="p-4 border-b border-gray-200">
+      <div className="w-80 bg-gray-50 border-r border-gray-200 flex flex-col h-screen">
+        {/* Fixed Header */}
+        <div className="p-4 border-b border-gray-200 flex-shrink-0">
           <h3 className="text-lg font-semibold text-gray-900 mb-2">Workflow Steps</h3>
           <p className="text-sm text-gray-600">Drag actions to the canvas to build your workflow</p>
         </div>
         
-        <div className="flex-1 overflow-y-auto p-4">
-          <div className="space-y-2">
-            {quickActions.map((action) => (
-              <div
-                key={action.id}
-                draggable
-                onDragStart={() => handleDragStart(action)}
-                className="bg-white border border-gray-200 rounded-lg p-3 cursor-grab hover:shadow-sm transition-shadow"
-              >
-                <div className="flex items-start gap-3">
-                  <action.icon className="h-5 w-5 text-gray-600 mt-0.5" />
-                  <div className="flex-1 min-w-0">
-                    <h4 className="text-sm font-medium text-gray-900 truncate">
-                      {action.title}
-                    </h4>
-                    <p className="text-xs text-gray-500 mt-1 line-clamp-2">
-                      {action.description}
-                    </p>
-                    <div className="flex items-center text-xs text-gray-400 mt-1">
-                      <span className="capitalize">{action.type}</span>
-                      <span className="mx-1">·</span>
-                      <span>{action.steps} step{action.steps > 1 ? 's' : ''}</span>
+        {/* Scrollable Content Area */}
+        <div className="flex-1 min-h-0">
+          <ScrollArea className="h-full">
+            <div className="p-4 space-y-2">
+              {quickActions.map((action) => (
+                <div
+                  key={action.id}
+                  draggable
+                  onDragStart={() => handleDragStart(action)}
+                  className="bg-white border border-gray-200 rounded-lg p-3 cursor-grab hover:shadow-sm transition-shadow"
+                >
+                  <div className="flex items-start gap-3">
+                    <action.icon className="h-5 w-5 text-gray-600 mt-0.5" />
+                    <div className="flex-1 min-w-0">
+                      <h4 className="text-sm font-medium text-gray-900 truncate">
+                        {action.title}
+                      </h4>
+                      <p className="text-xs text-gray-500 mt-1 line-clamp-2">
+                        {action.description}
+                      </p>
+                      <div className="flex items-center text-xs text-gray-400 mt-1">
+                        <span className="capitalize">{action.type}</span>
+                        <span className="mx-1">·</span>
+                        <span>{action.steps} step{action.steps > 1 ? 's' : ''}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          </ScrollArea>
         </div>
 
-        {/* Workflow Controls */}
-        <div className="p-4 border-t border-gray-200 bg-white">
+        {/* Fixed Workflow Controls */}
+        <div className="p-4 border-t border-gray-200 bg-white flex-shrink-0">
           <div className="space-y-2">
             <button className="w-full flex items-center justify-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
               <Play className="h-4 w-4" />
