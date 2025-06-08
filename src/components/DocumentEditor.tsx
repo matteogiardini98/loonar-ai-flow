@@ -39,7 +39,7 @@ const DocumentEditor = ({ document, onDocumentUpdate, onToggleAIAssistant }: Doc
       if (selection && selection.rangeCount > 0) {
         const range = selection.getRangeAt(0);
         range.deleteContents();
-        range.insertNode(document.createTextNode(mockAIResponse));
+        range.insertNode(window.document.createTextNode(mockAIResponse));
         
         // Update document content
         const newContent = editorRef.current?.textContent || '';

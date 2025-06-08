@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { FileEdit } from 'lucide-react';
 import DocumentSearchBar from './DocumentSearchBar';
 import DocumentTabs from './DocumentTabs';
 import DocumentEditor from './DocumentEditor';
