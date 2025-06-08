@@ -36,11 +36,11 @@ const useTextSelection = (containerRef: RefObject<HTMLElement>) => {
               end: range.endOffset
             });
             
-            // Calculate popup position relative to cursor/selection end
+            // Calculate popup position right below the selection end
             const rect = range.getBoundingClientRect();
             setPopupPosition({
-              x: rect.right + 10, // Position to the right of selection
-              y: rect.top + window.scrollY - 10 // Slightly above selection
+              x: rect.left,
+              y: rect.bottom + window.scrollY
             });
             
             setShowPopup(true);

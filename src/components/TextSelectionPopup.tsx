@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Bot, Wand2, ExpandIcon, FileText, Sparkles } from 'lucide-react';
+import { Moon, Wand2, ExpandIcon, FileText, Sparkles } from 'lucide-react';
 
 interface Position {
   x: number;
@@ -46,8 +46,7 @@ const TextSelectionPopup = ({ position, selectedText, onInstruction }: TextSelec
       className="absolute z-50 bg-white border border-gray-200 rounded-lg shadow-lg p-4 min-w-[320px]"
       style={{
         left: position.x,
-        top: position.y,
-        transform: 'translateY(-100%)',
+        top: position.y + 10,
       }}
     >
       {/* Selected text preview */}
@@ -60,7 +59,7 @@ const TextSelectionPopup = ({ position, selectedText, onInstruction }: TextSelec
       <div className="mb-3">
         <div className="flex gap-2">
           <Input
-            placeholder="Tell AI what to do with this text..."
+            placeholder="Ask Loona"
             value={customInstruction}
             onChange={(e) => setCustomInstruction(e.target.value)}
             onKeyPress={(e) => e.key === 'Enter' && handleCustomInstruction()}
@@ -71,7 +70,7 @@ const TextSelectionPopup = ({ position, selectedText, onInstruction }: TextSelec
             disabled={!customInstruction.trim() || isProcessing}
             className="bg-black text-white hover:bg-gray-800"
           >
-            <Bot className="h-4 w-4" />
+            <Moon className="h-4 w-4" />
           </Button>
         </div>
       </div>

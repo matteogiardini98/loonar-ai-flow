@@ -39,7 +39,7 @@ const DocumentEditor = ({ document, onDocumentUpdate, onToggleAIAssistant }: Doc
       if (selection && selection.rangeCount > 0) {
         const range = selection.getRangeAt(0);
         range.deleteContents();
-        range.insertNode(window.document.createTextNode(mockAIResponse));
+        range.insertNode(document.createTextNode(mockAIResponse));
         
         // Update document content
         const newContent = editorRef.current?.textContent || '';
@@ -62,7 +62,7 @@ const DocumentEditor = ({ document, onDocumentUpdate, onToggleAIAssistant }: Doc
           className="flex items-center gap-2"
         >
           <Bot className="h-4 w-4" />
-          AI Assistant
+          Ask Loona
         </Button>
       </div>
 
