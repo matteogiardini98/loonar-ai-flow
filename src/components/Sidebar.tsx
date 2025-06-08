@@ -39,7 +39,11 @@ const Sidebar = ({ activeTab, onTabChange }: SidebarProps) => {
     <div className="w-64 h-screen bg-white border-r border-gray-200 flex flex-col">
       {/* Logo */}
       <div className="p-6 border-b border-gray-100">
-        <h1 className="text-xl font-bold text-gray-900">Loonar</h1>
+        <img 
+          src="/lovable-uploads/0a088246-be19-4c62-bd51-4574d34f6b9c.png" 
+          alt="Loonar" 
+          className="h-8 w-auto"
+        />
       </div>
 
       {/* Navigation */}
