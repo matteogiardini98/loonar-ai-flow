@@ -49,7 +49,7 @@ const AssistantInterface = () => {
           
           <Button 
             onClick={handleSendQuery}
-            className="bg-black text-white hover:bg-gray-800 gap-2"
+            className="bg-coosmo-green text-coosmo-green-foreground hover:bg-coosmo-green/90 gap-2"
             disabled={!query.trim()}
           >
             Ask Loona
