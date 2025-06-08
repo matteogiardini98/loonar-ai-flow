@@ -45,8 +45,9 @@ const TextSelectionPopup = ({ position, selectedText, onInstruction }: TextSelec
     <div
       className="absolute z-50 bg-white border border-gray-200 rounded-lg shadow-lg p-4 min-w-[320px]"
       style={{
-        left: Math.max(10, Math.min(position.x, window.innerWidth - 340)),
-        top: position.y - 10,
+        left: position.x,
+        top: position.y,
+        transform: 'translateY(-100%)',
       }}
     >
       {/* Selected text preview */}

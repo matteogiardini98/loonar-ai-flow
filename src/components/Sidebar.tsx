@@ -10,8 +10,8 @@ const Sidebar = ({ activeTab, onTabChange }: SidebarProps) => {
   const navigationItems = [
     { id: 'loona', label: 'Loona', icon: Bot },
     { id: 'quick-actions', label: 'Quick actions', icon: Zap },
-    { id: 'workflows', label: 'Workflows', icon: GitBranch },
     { id: 'workspace', label: 'Workspace', icon: FileEdit },
+    { id: 'workflows', label: 'Workflows', icon: GitBranch },
     { id: 'library', label: 'Library', icon: Library },
     { id: 'analytics', label: 'Analytics', icon: BarChart3 },
   ];

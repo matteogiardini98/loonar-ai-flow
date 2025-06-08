@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { X, Bot, Clock, Lightbulb } from 'lucide-react';
+import { X, Clock, Lightbulb } from 'lucide-react';
 
 interface Document {
   id: string;
@@ -45,10 +45,7 @@ const AIAssistantPanel = ({ document, onClose }: AIAssistantPanelProps) => {
     <div className="w-80 bg-white border-l border-gray-200 flex flex-col h-full">
       {/* Header */}
       <div className="p-4 border-b border-gray-200 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <Bot className="h-5 w-5 text-blue-600" />
-          <span className="font-medium">AI Assistant</span>
-        </div>
+        <span className="font-medium text-lg">Loona</span>
         <Button variant="ghost" size="sm" onClick={onClose}>
           <X className="h-4 w-4" />
         </Button>
@@ -108,13 +105,13 @@ const AIAssistantPanel = ({ document, onClose }: AIAssistantPanelProps) => {
       <div className="p-4 border-t border-gray-200">
         <div className="flex gap-2">
           <Input
-            placeholder="Ask AI about this document..."
+            placeholder="Ask Loona about this document..."
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             className="flex-1"
           />
           <Button className="bg-black text-white hover:bg-gray-800">
-            <Bot className="h-4 w-4" />
+            Send
           </Button>
         </div>
       </div>
