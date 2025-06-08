@@ -16,19 +16,19 @@ const ActionModal = ({ isOpen, onClose, action, onExecute }: ActionModalProps) =
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent 
-        className="max-w-4xl max-h-[90vh] overflow-y-auto p-0 border-0 bg-transparent shadow-none ml-64 mr-6"
+        className="max-w-4xl max-h-[90vh] overflow-y-auto p-0 border-0 bg-transparent shadow-none"
         style={{
           position: 'fixed',
-          left: '16rem', // 256px (w-64) to avoid sidebar
-          right: '1.5rem',
+          left: '50%',
           top: '50%',
-          transform: 'translateY(-50%)',
+          transform: 'translate(-50%, -50%)',
+          marginLeft: '8rem', // Half of sidebar width (256px/2) to account for sidebar
           width: 'auto',
-          maxWidth: 'calc(100vw - 17.5rem)' // Account for sidebar width + margin
+          maxWidth: 'calc(100vw - 20rem)' // Account for sidebar width + margins
         }}
       >
         <div className="bg-white rounded-lg shadow-xl relative">
-          {/* Custom close button */}
+          {/* Remove the default close button and add our custom one */}
           <button
             onClick={onClose}
             className="absolute right-4 top-4 z-10 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
@@ -47,9 +47,9 @@ const ActionModal = ({ isOpen, onClose, action, onExecute }: ActionModalProps) =
         </div>
       </DialogContent>
       
-      {/* Custom overlay with lighter grey background */}
+      {/* Much lighter grey background overlay */}
       <div 
-        className="fixed inset-0 z-40 bg-gray-500/30 backdrop-blur-sm"
+        className="fixed inset-0 z-40 bg-gray-200/40 backdrop-blur-sm"
         onClick={onClose}
       />
     </Dialog>
