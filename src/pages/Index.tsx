@@ -1,12 +1,109 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React, { useState } from 'react';
+import Sidebar from '@/components/Sidebar';
+import AssistantInterface from '@/components/AssistantInterface';
+import QuickActions from '@/components/QuickActions';
+import ActionWorkspace from '@/components/ActionWorkspace';
+import LibraryView from '@/components/LibraryView';
+import AnalyticsView from '@/components/AnalyticsView';
 
 const Index = () => {
+  const [activeTab, setActiveTab] = useState('loona');
+  const [selectedAction, setSelectedAction] = useState<any>(null);
+  const [isExecuting, setIsExecuting] = useState(false);
+
+  const handleActionClick = (action: any) => {
+    setSelectedAction(action);
+  };
+
+  const handleActionExecute = (formData: any) => {
+    console.log('Executing action:', formData);
+    setIsExecuting(true);
+    
+    // Simulate execution
+    setTimeout(() => {
+      setIsExecuting(false);
+      setSelectedAction(null);
+      // Here you would typically handle the actual execution results
+    }, 2000);
+  };
+
+  const handleCloseAction = () => {
+    setSelectedAction(null);
+    setIsExecuting(false);
+  };
+
+  const renderMainContent = () => {
+    if (selectedAction) {
+      return (
+        <ActionWorkspace
+          action={selectedAction}
+          onClose={handleCloseAction}
+          onExecute={handleActionExecute}
+        />
+      );
+    }
+
+    switch (activeTab) {
+      case 'loona':
+      case 'quick-actions':
+        return (
+          <div className="space-y-8">
+            <AssistantInterface />
+            <QuickActions onActionClick={handleActionClick} />
+          </div>
+        );
+      case 'workflows':
+        return (
+          <div className="text-center py-12">
+            <h2 className="text-xl font-semibold text-gray-900 mb-4">Workflows</h2>
+            <p className="text-gray-600">Chain multiple tasks together for automated execution.</p>
+            <p className="text-sm text-gray-500 mt-2">Coming soon...</p>
+          </div>
+        );
+      case 'library':
+        return <LibraryView />;
+      case 'analytics':
+        return <AnalyticsView />;
+      case 'help':
+        return (
+          <div className="text-center py-12">
+            <h2 className="text-xl font-semibold text-gray-900 mb-4">Help & Support</h2>
+            <p className="text-gray-600">Get help with using Loonar and best practices for proposal management.</p>
+          </div>
+        );
+      case 'settings':
+        return (
+          <div className="text-center py-12">
+            <h2 className="text-xl font-semibold text-gray-900 mb-4">Settings</h2>
+            <p className="text-gray-600">Configure your Loonar workspace and preferences.</p>
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-white flex w-full">
+      <Sidebar activeTab={activeTab} onTabChange={setActiveTab} />
+      
+      <main className="flex-1 overflow-hidden">
+        <div className="h-full overflow-y-auto">
+          <div className="max-w-7xl mx-auto p-6">
+            {renderMainContent()}
+          </div>
+        </div>
+      </main>
+      
+      {isExecuting && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 text-center">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-black mx-auto mb-4"></div>
+            <p className="text-gray-900">Executing task...</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
