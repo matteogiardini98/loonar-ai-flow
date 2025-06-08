@@ -49,7 +49,7 @@ const ActionModal = ({ isOpen, onClose, action, onExecute }: ActionModalProps) =
       
       {/* Much lighter grey background overlay */}
       <div 
-        className="fixed inset-0 z-40 bg-gray-200/40 backdrop-blur-sm"
+        className="fixed inset-0 z-40 bg-gray-100/40 backdrop-blur-sm"
         onClick={onClose}
       />
     </Dialog>
