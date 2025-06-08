@@ -11,7 +11,7 @@ interface QuickAction {
   type: 'output' | 'draft' | 'table';
 }
 
-const quickActions: QuickAction[] = [
+export const quickActions: QuickAction[] = [
   {
     id: 'rfp-search',
     title: 'RFP AI Search',

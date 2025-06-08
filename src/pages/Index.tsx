@@ -5,6 +5,7 @@ import QuickActions from '@/components/QuickActions';
 import ActionWorkspace from '@/components/ActionWorkspace';
 import LibraryView from '@/components/LibraryView';
 import AnalyticsView from '@/components/AnalyticsView';
+import WorkflowCanvas from '@/components/WorkflowCanvas';
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState('loona');
@@ -64,13 +65,7 @@ const Index = () => {
           />
         );
       case 'workflows':
-        return (
-          <div className="text-center py-12">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">Workflows</h2>
-            <p className="text-gray-600">Chain multiple tasks together for automated execution.</p>
-            <p className="text-sm text-gray-500 mt-2">Coming soon...</p>
-          </div>
-        );
+        return <WorkflowCanvas />;
       case 'library':
         return <LibraryView />;
       case 'analytics':
@@ -100,9 +95,13 @@ const Index = () => {
       
       <main className="flex-1 overflow-hidden">
         <div className="h-full overflow-y-auto">
-          <div className="max-w-7xl mx-auto p-6">
-            {renderMainContent()}
-          </div>
+          {activeTab === 'workflows' ? (
+            <WorkflowCanvas />
+          ) : (
+            <div className="max-w-7xl mx-auto p-6">
+              {renderMainContent()}
+            </div>
+          )}
         </div>
       </main>
       
